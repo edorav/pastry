@@ -1,0 +1,37 @@
+
+<div class="row my-5">
+    <div class="card col-12 col-md-4 offset-md-4 my-3">
+        <div class="card-body login-card-body">
+        <p class="login-box-msg">Login</p>
+
+        <form [formGroup]="loginForm" (submit)="logIn()">
+            <div class="input-group mb-3">
+                <input type="email" [ngClass]="{
+                    'form-control': true,
+                    'border-danger': (displayErrors || loginForm.get('email').touched) && loginForm.get('email').errors
+                }" formControlName="email" placeholder="Email" />
+            
+            </div>
+            <div class="input-group mb-3">
+                <input type="password" [ngClass]="{
+                    'form-control': true,
+                    'border-danger': (displayErrors || loginForm.get('password').touched) && loginForm.get('password').errors
+                }" formControlName="password" placeholder="Password" />
+            
+            </div>
+            <div class="row">
+
+            <!-- /.col -->
+            <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block">Log In</button>
+            </div>
+            <!-- /.col -->
+            </div>
+        </form>
+
+
+        </div>
+        <!-- /.login-card-body -->
+    </div>
+</div>
+    

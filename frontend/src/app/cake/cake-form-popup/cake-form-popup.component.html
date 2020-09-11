@@ -1,0 +1,89 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ cake ? 'Modifica il dolce ' + cake.name : 'Nuovo dolce' }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('no')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="cakeForm">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label>Nome*</label>
+                    <input type="text" [ngClass]="{
+                        'form-control': true,
+                        'border-danger': (displayErrors || cakeForm.get('name').touched) && cakeForm.get('name').errors
+                    }" formControlName="name" />
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label>Prezzo</label>
+                    <input type="text" [ngClass]="{
+                        'form-control': true,
+                        'border-danger': (displayErrors || cakeForm.get('price').touched) && cakeForm.get('price').errors
+                    }" formControlName="price" />
+                </div>
+           
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Quantità (min. 1)</label>
+                    <input type="number" [ngClass]="{
+                        'form-control': true,
+                        'border-danger': (displayErrors || cakeForm.get('quantity').touched) && cakeForm.get('quantity').errors
+                    }" formControlName="quantity" />
+                </div>
+           
+            </div>
+
+            <div class="col-12 d-flex my-2">
+                <h4>Ingredienti</h4>
+                <button class="btn btn-primary btn-sm ml-2" (click)="addIngredient()">+</button>
+            </div>
+            
+            <ng-container formArrayName="ingredients">
+                <div *ngFor="let _ of ingredients.controls; index as i">
+                    <div class="col-12">
+                        <ng-container [formGroupName]="i">
+                            <div class="row my-2">
+                                <div class="col-12 col-md-4">
+                                    <input [ngClass]="{
+                                        'form-control': true
+                                    }" formControlName="name"
+                                    placeholder="Nome" />
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <input [ngClass]="{
+                                        'form-control': true
+                                    }" formControlName="quantity"
+                                    placeholder="Quantità" />
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <input [ngClass]="{
+                                        'form-control': true
+                                    }" formControlName="unitmeasure"
+                                    placeholder="Unità di misura" />
+                                </div>
+                                <div class="col-12 col-md-2">
+                                    <button class="btn btn-danger btn-sm" (click)="deleteIngredient(i)">X</button>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+            
+            <!-- /.card-body -->
+          </div>
+    
+    
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="save()">Salva</button>
+            <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('no')">Annulla</button>
+        </div>
+    </form>
+    
+    
+  </div>
+  
